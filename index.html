@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+
+<html lang="ru">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<!--
+    Практика 10. DOM, события и классы.
+    Проект: «Галерея артефактов».
+
+    В файле используются:
+    - DOM-манипуляции (создание карточек, вкладок категорий)
+    - обработчики событий (click, input, keydown)
+    - работа с CSS-классами (активная вкладка, избранное, тёмная тема, модальное окно)
+  -->
+<title>Practice 10 — Галерея артефактов</title>
+<link href="/src/style.css" rel="stylesheet"/>
+<script src="/src/main.js" type="module"></script>
+</head>
+<body>
+<!--
+    Верхняя панель:
+    - Заголовок проекта
+    - Кнопка переключения темы (тёмная/светлая)
+    ВНИМАНИЕ: счётчик карточек (значок с цифрой рядом с «Тема») убран по требованию задания.
+  -->
+<header class="header">
+<div class="header__row">
+<h1 class="logo">Галерея артефактов</h1>
+<div class="header__actions">
+<button class="btn btn--ghost" id="theme-toggle" type="button">
+          Тема
+        </button>
+</div>
+</div>
+<!--
+      Форма добавления артефакта.
+      Пользователь вводит:
+      - название
+      - категорию
+      - ссылку на изображение (URL)
+      Затем нажимает «Добавить артефакт» — карточка создаётся в галерее.
+    -->
+<div class="add-form">
+<input class="input" id="artifact-title" placeholder="Название"/>
+<input class="input" id="artifact-category" placeholder="Категория"/>
+<input class="input" id="artifact-image" placeholder="URL изображения"/>
+<button class="btn" id="add-btn" type="button">Добавить артефакт</button>
+</div>
+<!--
+      Панель фильтрации:
+      - Поиск по категории (строка поиска фильтрует карточки по совпадению в категории)
+      - Вкладки категорий (кнопки создаются автоматически при добавлении новых категорий)
+    -->
+<div class="toolbar">
+<input class="input input--search" id="search-input" placeholder="Поиск по категории..."/>
+<div class="tabs" id="category-tabs">
+<button class="tab tab--active" data-category="__all" type="button">Все</button>
+</div>
+</div>
+<!--
+      Баннер для сообщений об ошибке (например, если пользователь не заполнил поля).
+      Показывается на короткое время и автоматически скрывается.
+    -->
+<div class="banner banner--hidden" id="banner" role="alert">
+      Заполните название, категорию и URL изображения.
+    </div>
+</header>
+<main class="main">
+<div class="gallery" id="gallery"></div>
+</main>
+<!--
+    Модальное окно для просмотра карточки в деталях.
+    Открывается кликом по карточке.
+    Закрывается:
+    - по клику на крестик
+    - по клику на затемнённый фон
+    - по клавише Escape
+  -->
+<div class="modal modal--hidden" id="modal">
+<div class="modal__backdrop" data-close="true"></div>
+<div class="modal__content">
+<button aria-label="Закрыть" class="modal__close" id="modal-close" type="button">×</button>
+<img alt="" class="modal__image" id="modal-image" src="/images/map.webp"/>
+<h2 class="modal__title" id="modal-title"></h2>
+<p class="modal__category" id="modal-category"></p>
+</div>
+</div>
+</body>
+</html>
